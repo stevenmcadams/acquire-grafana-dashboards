@@ -1,5 +1,6 @@
-local grafana = import '../../grafonnet-lib/grafonnet/grafana.libsonnet';
-local datasite = import '../index.libsonnet';
+local libs = import '../../index.libsonnet';
+local grafana = libs.grafana;
+local datasite = libs.datasite;
 
 {
   new(

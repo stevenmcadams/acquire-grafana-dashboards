@@ -1,5 +1,6 @@
-local grafana = import 'grafonnet-lib/grafonnet/grafana.libsonnet';
-local datasite = import 'datasite-lib/index.libsonnet';
+local libs = import '../libs/index.libsonnet';
+local grafana = libs.grafana;
+local datasite = libs.datasite;
 
 grafana.dashboard.new(
   'Task List Service',
@@ -12,4 +13,5 @@ grafana.dashboard.new(
   datasite.rows.httpServerRequests.new(),
   datasite.rows.jvm.new(),
   datasite.rows.rabbit.new(),
+  datasite.rows.logback.new(),
 ])
