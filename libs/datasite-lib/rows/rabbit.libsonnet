@@ -9,6 +9,8 @@ local datasite = libs.datasite;
         title=title
     )
     .addPanels([
-      datasite.panels.rabbit.new()
+      datasite.panels.rabbitHealth.new(),
+      datasite.panels.rabbitConsumer.new(),
+      datasite.panels.rabbitPublisher.new()
     ]),
 }
