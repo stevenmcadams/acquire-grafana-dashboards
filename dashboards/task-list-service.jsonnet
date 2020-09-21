@@ -9,8 +9,14 @@ grafana.dashboard.new(
   time_from='now-1h',
   refresh='1m',
 )
+.addTemplates([
+  datasite.templates.common.env(),
+  datasite.templates.common.httpServer(),
+  datasite.templates.common.httpClient()
+])
 .addRows([
   datasite.rows.httpServerRequests.new(),
+  datasite.rows.httpClientRequests.new(),
   datasite.rows.jvm.new(),
   datasite.rows.rabbit.new(),
   datasite.rows.logback.new(),

@@ -19,3 +19,4 @@ scrape_configs:
         - 'host.docker.internal:8818'
         labels:
           instance: 'task-list-service-1'
+          env: 'produs'

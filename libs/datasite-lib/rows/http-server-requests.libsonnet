@@ -9,8 +9,11 @@ local datasite = libs.datasite;
       title=title
     )
     .addPanels([
-      datasite.panels.httpLatency.new(),
-      datasite.panels.httpStatus.new(),
-      datasite.panels.httpThroughput.new()
+      datasite.panels.httpLatency.new(global=true, metric='http_server_requests'),
+      datasite.panels.httpStatus.new(global=true, metric='http_server_requests'),
+      datasite.panels.httpThroughput.new(global=true, metric='http_server_requests'),
+      datasite.panels.httpLatency.new(metric='http_server_requests'),
+      datasite.panels.httpStatus.new(metric='http_server_requests'),
+      datasite.panels.httpThroughput.new(metric='http_server_requests')
     ]),
 }

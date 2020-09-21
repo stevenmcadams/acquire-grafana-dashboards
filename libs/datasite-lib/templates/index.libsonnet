@@ -1,4 +1,4 @@
 {
-
+    common:: import 'common.libsonnet',
 }
   
