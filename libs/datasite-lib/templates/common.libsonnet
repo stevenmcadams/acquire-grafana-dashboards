@@ -9,7 +9,16 @@ local datasite = libs.datasite;
         query='label_values(env)',
         refresh='time',
         includeAll=false,
-        multi=true,
+        multi=false,
+        sort=1
+    ),
+    application():: grafana.template.new(
+        name='application',
+        datasource=datasite.config.datasource,
+        query='label_values(application)',
+        refresh='time',
+        includeAll=false,
+        multi=false,
         sort=1
     ),
     httpServer():: grafana.template.new(

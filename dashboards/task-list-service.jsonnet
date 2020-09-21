@@ -11,6 +11,7 @@ grafana.dashboard.new(
 )
 .addTemplates([
   datasite.templates.common.env(),
+  datasite.templates.common.application(),
   datasite.templates.common.httpServer(),
   datasite.templates.common.httpClient()
 ])
