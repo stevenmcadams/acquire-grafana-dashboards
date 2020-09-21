@@ -6,7 +6,8 @@ local datasite = libs.datasite;
   new(
     title='JVM'
   ):: grafana.row.new(
-        title=title
+        title=title,
+        collapse=true
     )
     .addPanels([
       datasite.panels.jvmBufferCount.new(),

@@ -6,7 +6,8 @@ local datasite = libs.datasite;
   new(
     title='Rabbit Usage'
   ):: grafana.row.new(
-        title=title
+        title=title,
+        collapse=true
     )
     .addPanels([
       datasite.panels.rabbitHealth.new(),

@@ -6,7 +6,8 @@ local datasite = libs.datasite;
   new(
     title='HTTP Client Requests'
   ):: grafana.row.new(
-      title=title
+      title=title,
+      collapse=true
     )
     .addPanels([
       datasite.panels.httpLatency.new(global=true, metric='http_client_requests'),
