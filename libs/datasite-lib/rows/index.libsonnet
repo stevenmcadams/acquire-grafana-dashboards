@@ -3,6 +3,7 @@
     httpClientRequests:: import 'http-client-requests.libsonnet',
     rabbit:: import 'rabbit.libsonnet',
     jvm:: import 'jvm.libsonnet',
-    logback:: import 'logback.libsonnet'
+    logback:: import 'logback.libsonnet',
+    mongodb:: import 'mongodb.libsonnet'
 }
   

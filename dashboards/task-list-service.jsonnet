@@ -18,6 +18,7 @@ grafana.dashboard.new(
 .addRows([
   datasite.rows.httpServerRequests.new(),
   datasite.rows.httpClientRequests.new(),
+  datasite.rows.mongodb.new(),
   datasite.rows.jvm.new(),
   datasite.rows.rabbit.new(),
   datasite.rows.logback.new(),
