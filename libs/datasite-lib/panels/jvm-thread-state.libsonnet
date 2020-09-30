@@ -9,4 +9,10 @@ local datasite = libs.datasite;
     title=title,
     datasource=datasite.config.datasource
   )
+  .addTarget(
+    grafana.prometheus.target(
+      expr = 'jvm_threads_states_threads{application="$application"}',
+      legendFormat = '{{ state }}'
+    )
+  ),
 }
