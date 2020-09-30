@@ -17,7 +17,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (status) ( rate('+metric+'_seconds_count[1m]) )' else 'sum by (status) ( rate('+metric+'_seconds_count{uri="[['+metric+']]"}[1m]) )',
+      expr = if global then 'sum by (status) ( rate('+metric+'_seconds_count[1m]) )' else 'sum by (status) ( rate('+metric+'_seconds_count{uri=~"$'+metric+'"}[1m]) )',
       legendFormat = '{{ status }}'
     )
   ),

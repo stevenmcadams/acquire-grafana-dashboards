@@ -17,7 +17,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'irate('+metric+'_seconds_count[1m])' else 'irate('+metric+'_seconds_count{uri="[['+metric+']]"}[1m])',
+      expr = if global then 'irate('+metric+'_seconds_count[1m])' else 'irate('+metric+'_seconds_count{uri=~"$'+metric+'"}[1m])',
       legendFormat = '{{ uri }}'
     )
   ),
