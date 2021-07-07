@@ -20,3 +20,21 @@ scrape_configs:
         labels:
           instance: 'task-list-service-1'
           env: 'produs'
+
+
+  # `node` takes care of scraping node_exporter instances
+  # that gives us all sorts of information about the host
+  # in which the exporter runs.
+  - job_name: 'findings-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+
+      # Given that we're only testing a single instance that
+      # we know the address very well, statically set it here
+      # with a custom instance label so that it looks better
+      # in the ui (and metrics).
+      - targets:
+        - 'host.docker.internal:8812'
+        labels:
+          instance: 'findings-service-1'
+          env: 'produs'
