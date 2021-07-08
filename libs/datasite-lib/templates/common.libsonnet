@@ -55,6 +55,7 @@ local datasite = libs.datasite;
         refresh='time',
         includeAll=true,
         multi=true,
-        sort=1
+        sort=1,
+        hide='true'
     )
 }
