@@ -33,18 +33,27 @@ local datasite = libs.datasite;
     httpServer():: grafana.template.new(
         name='http_server_requests',
         datasource=datasite.config.datasource,
-        query='label_values(http_server_requests_seconds_sum, uri)',
+        query='label_values(http_server_requests_seconds_sum{' + datasite.config.global_filter + '}, uri)',
         refresh='time',
-        includeAll=false,
+        includeAll=true,
         multi=true,
         sort=1
     ),
     httpClient():: grafana.template.new(
         name='http_client_requests',
         datasource=datasite.config.datasource,
-        query='label_values(http_client_requests_seconds_sum, uri)',
+        query='label_values(http_client_requests_seconds_sum{' + datasite.config.global_filter + '}, uri)',
         refresh='time',
-        includeAll=false,
+        includeAll=true,
+        multi=true,
+        sort=1
+    ),
+    rabbit():: grafana.template.new(
+        name='rabbit',
+        datasource=datasite.config.datasource,
+        query='label_values(rabbitmq_connections{' + datasite.config.global_filter + '}, name)',
+        refresh='time',
+        includeAll=true,
         multi=true,
         sort=1
     )

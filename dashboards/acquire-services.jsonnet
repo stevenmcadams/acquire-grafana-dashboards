@@ -14,7 +14,8 @@ grafana.dashboard.new(
   datasite.templates.common.service(),
   datasite.templates.common.pod(),
   datasite.templates.common.httpServer(),
-  datasite.templates.common.httpClient()
+  datasite.templates.common.httpClient(),
+  datasite.templates.common.rabbit()
 ])
 .addRows([
   datasite.rows.httpServerRequests.new(),
