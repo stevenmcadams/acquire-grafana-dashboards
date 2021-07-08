@@ -10,8 +10,9 @@ grafana.dashboard.new(
   refresh='1m',
 )
 .addTemplates([
-  datasite.templates.common.env(),
-  datasite.templates.common.application(),
+  datasite.templates.common.cluster(),
+  datasite.templates.common.service(),
+  datasite.templates.common.pod(),
   datasite.templates.common.httpServer(),
   datasite.templates.common.httpClient()
 ])

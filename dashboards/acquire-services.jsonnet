@@ -3,8 +3,8 @@ local grafana = libs.grafana;
 local datasite = libs.datasite;
 
 grafana.dashboard.new(
-  'Task List Service',
-  tags=['acquire', 'task-list'],
+  'Acquire Services',
+  tags=['acquire', 'k8s', 'spring-boot'],
   editable=true,
   time_from='now-1h',
   refresh='1m',

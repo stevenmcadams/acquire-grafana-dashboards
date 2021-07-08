@@ -18,8 +18,9 @@ scrape_configs:
       - targets:
         - 'host.docker.internal:8818'
         labels:
-          instance: 'task-list-service-1'
-          env: 'produs'
+          cluster: 'k8s-us7-dev-stateless-green'
+          service: 'task-list-service'
+          pod: 'task-list-service-1'
 
 
   # `node` takes care of scraping node_exporter instances
@@ -36,5 +37,6 @@ scrape_configs:
       - targets:
         - 'host.docker.internal:8812'
         labels:
-          instance: 'findings-service-1'
-          env: 'produs'
+          cluster: 'k8s-us7-dev-stateless-green'
+          service: 'findings-service'
+          pod: 'findings-service-1'

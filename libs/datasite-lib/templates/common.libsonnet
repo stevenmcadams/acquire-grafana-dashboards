@@ -3,22 +3,31 @@ local grafana = libs.grafana;
 local datasite = libs.datasite;
 
 {
-    env():: grafana.template.new(
-        name='env',
+    cluster():: grafana.template.new(
+        name='cluster',
         datasource=datasite.config.datasource,
-        query='label_values(env)',
+        query='label_values(jvm_memory_used_bytes, cluster)',
+        refresh='time',
+        includeAll=false,
+        multi=true,
+        sort=1
+    ),
+    service():: grafana.template.new(
+        name='service',
+        datasource=datasite.config.datasource,
+        query='label_values(jvm_memory_used_bytes{cluster=~"^$cluster"}, service)',
         refresh='time',
         includeAll=false,
         multi=false,
         sort=1
     ),
-    application():: grafana.template.new(
-        name='application',
+    pod():: grafana.template.new(
+        name='pod',
         datasource=datasite.config.datasource,
-        query='label_values(application)',
+        query='label_values(jvm_memory_used_bytes{cluster=~"^$cluster", service=~"^$service"}, pod)',
         refresh='time',
-        includeAll=false,
-        multi=false,
+        includeAll=true,
+        multi=true,
         sort=1
     ),
     httpServer():: grafana.template.new(
