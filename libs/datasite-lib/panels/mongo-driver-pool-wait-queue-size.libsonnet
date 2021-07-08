@@ -13,7 +13,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'mongodb_driver_pool_waitqueuesize',
+      expr = 'mongodb_driver_pool_waitqueuesize{' + datasite.config.global_filter + '}',
       legendFormat = 'wait queue size'
     )
   ),

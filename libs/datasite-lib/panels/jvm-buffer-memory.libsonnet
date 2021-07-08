@@ -11,13 +11,13 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_buffer_memory_used_bytes',
+      expr = 'jvm_buffer_memory_used_bytes{' + datasite.config.global_filter + '}',
       legendFormat = '{{ id }}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_buffer_total_capacity_bytes',
+      expr = 'jvm_buffer_total_capacity_bytes{' + datasite.config.global_filter + '}',
       legendFormat = '{{ id }}'
     )
   ),

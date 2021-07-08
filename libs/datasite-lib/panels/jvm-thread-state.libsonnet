@@ -11,7 +11,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_threads_states_threads{application="$application"}',
+      expr = 'jvm_threads_states_threads{' + datasite.config.global_filter + '}',
       legendFormat = '{{ state }}'
     )
   ),

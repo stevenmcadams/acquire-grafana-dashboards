@@ -11,19 +11,19 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(jvm_gc_pause_seconds_count[1m])',
+      expr = 'rate(jvm_gc_pause_seconds_count{' + datasite.config.global_filter + '}[1m])',
       legendFormat = 'count - {{ instance }} - {{ action }}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_gc_pause_seconds_max',
+      expr = 'jvm_gc_pause_seconds_max{' + datasite.config.global_filter + '}',
       legendFormat = 'max - {{ instance }} - {{ action }}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(jvm_gc_pause_seconds_sum[1m])',
+      expr = 'rate(jvm_gc_pause_seconds_sum{' + datasite.config.global_filter + '}[1m])',
       legendFormat = 'total - {{ instance }} - {{ action }}'
     )
   ),

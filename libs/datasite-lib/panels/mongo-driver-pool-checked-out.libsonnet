@@ -13,7 +13,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'mongodb_driver_pool_checkedout',
+      expr = 'mongodb_driver_pool_checkedout{' + datasite.config.global_filter + '}',
       legendFormat = 'driver pool checked out'
     )
   ),

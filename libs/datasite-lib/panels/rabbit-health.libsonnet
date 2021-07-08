@@ -12,13 +12,13 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by ($env) (rabbitmq_connections)',
+      expr = 'sum by ($env) (rabbitmq_connections{' + datasite.config.global_filter + '})',
       legendFormat = 'connections'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by ($env) (rabbitmq_channels)',
+      expr = 'sum by ($env) (rabbitmq_channels{' + datasite.config.global_filter + '})',
       legendFormat = 'channels'
     )
   ),

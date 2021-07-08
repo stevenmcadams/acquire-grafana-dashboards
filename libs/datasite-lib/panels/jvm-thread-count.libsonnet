@@ -11,17 +11,17 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_threads_daemon_threads',
+      expr = 'jvm_threads_daemon_threads{' + datasite.config.global_filter + '}',
       legendFormat = 'daemon - {{ instance }}'
     )
   ).addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_threads_live_threads',
+      expr = 'jvm_threads_live_threads{' + datasite.config.global_filter + '}',
       legendFormat = 'live - {{ instance }}'
     )
   ).addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_threads_peak_threads',
+      expr = 'jvm_threads_peak_threads{' + datasite.config.global_filter + '}',
       legendFormat = 'peak - {{ instance }}'
     )
   ),

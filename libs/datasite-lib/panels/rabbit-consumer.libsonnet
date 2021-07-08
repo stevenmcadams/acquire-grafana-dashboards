@@ -11,19 +11,19 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by (env) (rate(rabbitmq_rejected_total[1m]))',
+      expr = 'sum by (env) (rate(rabbitmq_rejected_total{' + datasite.config.global_filter + '}[1m]))',
       legendFormat = 'rejected total'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by (env) (rate(rabbitmq_acknowledged_total[1m]))',
+      expr = 'sum by (env) (rate(rabbitmq_acknowledged_total{' + datasite.config.global_filter + '}[1m]))',
       legendFormat = 'acknowledged total'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by (env) (rate(rabbitmq_consumed_total[1m]))',
+      expr = 'sum by (env) (rate(rabbitmq_consumed_total{' + datasite.config.global_filter + '}[1m]))',
       legendFormat = 'consumed total'
     )
   ),

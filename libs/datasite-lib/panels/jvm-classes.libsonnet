@@ -11,13 +11,13 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_classes_loaded_classes',
+      expr = 'jvm_classes_loaded_classes{' + datasite.config.global_filter + '}',
       legendFormat = 'loaded'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(jvm_classes_unloaded_classes_total[1m])',
+      expr = 'rate(jvm_classes_unloaded_classes_total{' + datasite.config.global_filter + '}[1m])',
       legendFormat = 'unloaded'
     )
   ),

@@ -13,7 +13,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'mongodb_driver_pool_size',
+      expr = 'mongodb_driver_pool_size{' + datasite.config.global_filter + '}',
       legendFormat = 'pool size'
     )
   ),

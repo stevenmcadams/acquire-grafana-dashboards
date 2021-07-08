@@ -11,13 +11,13 @@ local datasite = libs.datasite;
   )
     .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(jvm_gc_memory_allocated_bytes_total[1m])',
+      expr = 'rate(jvm_gc_memory_allocated_bytes_total{' + datasite.config.global_filter + '}[1m])',
       legendFormat = 'allocated - {{ instance }}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(jvm_gc_memory_promoted_bytes_total[1m])',
+      expr = 'rate(jvm_gc_memory_promoted_bytes_total{' + datasite.config.global_filter + '}[1m])',
       legendFormat = 'promoted - {{ instance }}'
     )
   ),

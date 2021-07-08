@@ -11,13 +11,13 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_gc_live_data_size_bytes',
+      expr = 'jvm_gc_live_data_size_bytes{' + datasite.config.global_filter + '}',
       legendFormat = 'live - {{ instance }}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_gc_max_data_size_bytes',
+      expr = 'jvm_gc_max_data_size_bytes{' + datasite.config.global_filter + '}',
       legendFormat = 'max - {{ instance }}'
     )
   ),

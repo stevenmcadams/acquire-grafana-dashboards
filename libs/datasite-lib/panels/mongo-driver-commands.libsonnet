@@ -13,7 +13,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'rate(mongodb_driver_commands_seconds_count[1m])',
+      expr = 'rate(mongodb_driver_commands_seconds_count{' + datasite.config.global_filter + '}[1m])',
       legendFormat = '{{ command }}'
     )
   ),

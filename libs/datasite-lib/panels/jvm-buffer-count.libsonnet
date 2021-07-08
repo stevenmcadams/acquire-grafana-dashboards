@@ -11,7 +11,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'jvm_buffer_count_buffers',
+      expr = 'jvm_buffer_count_buffers{' + datasite.config.global_filter + '}',
       legendFormat = '{{ id }}'
     )
   ),

@@ -10,7 +10,7 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = 'sum by (level) ( rate(logback_events_total[1m]) )',
+      expr = 'sum by (level) ( rate(logback_events_total{' + datasite.config.global_filter + '}[1m]) )',
       legendFormat = '{{ level }}'
     )
   ),
