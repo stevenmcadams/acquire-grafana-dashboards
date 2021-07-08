@@ -2,6 +2,15 @@ local libs = import '../../index.libsonnet';
 local grafana = libs.grafana;
 local datasite = libs.datasite;
 
+local queryBuilder = {
+  new(
+    global=null,
+    metric=null
+  ):: {
+    query: if global then 'sum by (name) ('+metric+'{' + datasite.config.global_filter + '})' else 'sum by (name) ('+metric+'{' + datasite.config.global_filter + ', name=~"^$rabbit"})'
+  }
+};
+
 {
   new(
     title='Rabbit Health Metrics',
@@ -16,13 +25,13 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rabbitmq_connections{' + datasite.config.global_filter + '})' else 'sum by (name) (rabbitmq_connections{' + datasite.config.global_filter + ', name=~"^$rabbit"})',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_connections').query,
       legendFormat = 'connections - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rabbitmq_channels{' + datasite.config.global_filter + '})' else 'sum by (name) (rabbitmq_channels{' + datasite.config.global_filter + ', name=~"^$rabbit"})',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_channels').query,
       legendFormat = 'channels - {{name}}'
     )
   ),

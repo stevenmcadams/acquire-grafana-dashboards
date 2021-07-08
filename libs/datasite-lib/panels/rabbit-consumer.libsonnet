@@ -2,6 +2,16 @@ local libs = import '../../index.libsonnet';
 local grafana = libs.grafana;
 local datasite = libs.datasite;
 
+local queryBuilder = {
+  new(
+    global=null,
+    metric=null
+  ):: {
+    query: if global then 'sum by (name) (rate('+metric+'{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate('+metric+'{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))'
+  }
+};
+
+
 {
   new(
     title='Rabbit Consumer Metrics',
@@ -16,19 +26,19 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_rejected_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_rejected_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_rejected_total').query,
       legendFormat = 'rejected total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_acknowledged_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_rejected_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_acknowledged_total').query,
       legendFormat = 'acknowledged total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_consumed_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_consumed_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_consumed_total').query,
       legendFormat = 'consumed total - {{name}}'
     )
   ),

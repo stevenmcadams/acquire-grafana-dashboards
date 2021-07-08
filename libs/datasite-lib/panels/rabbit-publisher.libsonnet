@@ -2,6 +2,16 @@ local libs = import '../../index.libsonnet';
 local grafana = libs.grafana;
 local datasite = libs.datasite;
 
+local queryBuilder = {
+  new(
+    global=null,
+    metric=null
+  ):: {
+    query: if global then 'sum by (name) (rate('+metric+'{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate('+metric+'{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+  }
+};
+
+
 {
   new(
     title='Rabbit Publisher Metrics',
@@ -16,31 +26,31 @@ local datasite = libs.datasite;
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_published_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_published_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_published_total').query,
       legendFormat = 'published total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_not_acknowledged_published_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_not_acknowledged_published_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_not_acknowledged_published_total').query,
       legendFormat = 'not acknowledged published total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_acknowledged_published_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_acknowledged_published_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_acknowledged_published_total').query,
       legendFormat = 'acknowledged published total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_failed_to_publish_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_failed_to_publish_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_failed_to_publish_total').query,
       legendFormat = 'failed to publish total - {{name}}'
     )
   )
   .addTarget(
     grafana.prometheus.target(
-      expr = if global then 'sum by (name) (rate(rabbitmq_unrouted_published_total{' + datasite.config.global_filter + '}[1m]))' else 'sum by (name) (rate(rabbitmq_unrouted_published_total{' + datasite.config.global_filter + ', name=~"^$rabbit"}[1m]))',
+      expr = queryBuilder.new(global=global, metric='rabbitmq_unrouted_published_total').query,
       legendFormat = 'unrouted published total - {{name}}'
     )
   ),
