@@ -9,10 +9,11 @@ do
     echo "generating $dashboard"
     echo "==========================="
     jsonnet $f -o docker/grafana/provisioning/dashboards/$dashboard
-    payload="{\"dashboard\": $(jq . docker/grafana/provisioning/dashboards/$dashboard), \"overwrite\": true}"
+    payload="{\"dashboard\": $(jq . docker/grafana/provisioning/dashboards/$dashboard), \"overwrite\": true, \"folderUid\":\"OX5wsHm7k\"}"
 
-    curl -X POST $BASIC_AUTH \
+    curl -X POST \
         -H 'Content-Type: application/json' \
+        -H "Authorization: Bearer $JWT_TOKEN" \
         -d "${payload}" \
-        "http://admin:admin@localhost:3000/api/dashboards/db"
+        "https://sauron.datasite.com/api/dashboards/db"
 done
