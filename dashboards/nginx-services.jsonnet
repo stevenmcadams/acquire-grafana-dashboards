@@ -3,8 +3,8 @@ local grafana = libs.grafana;
 local datasite = libs.datasite;
 
 grafana.dashboard.new(
-  'Public Gateway',
-  tags=['gateway', 'nginx'],
+  'Nginx Services',
+  tags=['nginx'],
   editable=false,
   time_from='now-1h',
   refresh='1m',

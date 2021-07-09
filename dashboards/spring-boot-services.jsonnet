@@ -3,8 +3,8 @@ local grafana = libs.grafana;
 local datasite = libs.datasite;
 
 grafana.dashboard.new(
-  'Acquire Services',
-  tags=['acquire', 'k8s', 'spring-boot'],
+  'Spring Boot Services',
+  tags=['k8s', 'spring-boot'],
   editable=false,
   time_from='now-1h',
   refresh='1m',
