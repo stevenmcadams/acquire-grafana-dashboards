@@ -5,6 +5,7 @@
     rabbitConsumer:: import 'rabbit-consumer.libsonnet',
     rabbitHealth:: import 'rabbit-health.libsonnet',
     rabbitPublisher:: import 'rabbit-publisher.libsonnet',
+    rabbitQueues:: import 'rabbit-queues.libsonnet',
     logback:: import 'logback.libsonnet',
     mongoDriverCommands:: import 'mongo-driver-commands.libsonnet',
     mongoDriverPoolCheckedOut:: import 'mongo-driver-pool-checked-out.libsonnet',

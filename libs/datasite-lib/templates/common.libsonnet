@@ -57,5 +57,15 @@ local datasite = libs.datasite;
         multi=true,
         sort=1,
         hide='true'
+    ),
+    rabbitQueues():: grafana.template.new(
+        name='rabbit_queues',
+        datasource=datasite.config.datasource,
+        query='label_values(spring_rabbitmq_listener_seconds_max{' + datasite.config.global_filter + '}, queue)',
+        refresh='time',
+        includeAll=true,
+        multi=true,
+        sort=1,
+        hide='true'
     )
 }
