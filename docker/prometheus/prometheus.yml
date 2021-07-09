@@ -40,3 +40,21 @@ scrape_configs:
           cluster: 'k8s-us7-dev-stateless-green'
           service: 'findings-service'
           pod: 'findings-service-1'
+
+  # `node` takes care of scraping node_exporter instances
+  # that gives us all sorts of information about the host
+  # in which the exporter runs.
+  - job_name: 'nginx'
+    metrics_path: '/metrics'
+    static_configs:
+
+      # Given that we're only testing a single instance that
+      # we know the address very well, statically set it here
+      # with a custom instance label so that it looks better
+      # in the ui (and metrics).
+      - targets:
+        - 'host.docker.internal:9113'
+        labels:
+          cluster: 'dspus8pkubeapps-nazgul-generic'
+          service: 'pcf-public-gateway-nginx-dev'
+          pod: 'pcf-public-gateway-nginx-dev-1'

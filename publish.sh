@@ -9,7 +9,7 @@ do
     echo "generating $dashboard"
     echo "==========================="
     jsonnet $f -o docker/grafana/provisioning/dashboards/$dashboard
-    payload="{\"dashboard\": $(jq . docker/grafana/provisioning/dashboards/$dashboard), \"overwrite\": true, \"folderUid\":\"OX5wsHm7k\"}"
+    payload="{\"dashboard\": $(jq . docker/grafana/provisioning/dashboards/$dashboard), \"overwrite\": true, \"folderId\":534}"
 
     curl -X POST \
         -H 'Content-Type: application/json' \

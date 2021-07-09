@@ -5,7 +5,7 @@ local datasite = libs.datasite;
 grafana.dashboard.new(
   'Acquire Services',
   tags=['acquire', 'k8s', 'spring-boot'],
-  editable=true,
+  editable=false,
   time_from='now-1h',
   refresh='1m',
 )

@@ -3,28 +3,34 @@ local grafana = libs.grafana;
 local datasite = libs.datasite;
 
 {
-    cluster():: grafana.template.new(
+    cluster(
+        metric='jvm_memory_used_bytes'
+    ):: grafana.template.new(
         name='cluster',
         datasource=datasite.config.datasource,
-        query='label_values(jvm_memory_used_bytes, cluster)',
+        query='label_values('+metric+', cluster)',
         refresh='time',
         includeAll=false,
         multi=true,
         sort=1
     ),
-    service():: grafana.template.new(
+    service(
+        metric='jvm_memory_used_bytes'
+    ):: grafana.template.new(
         name='service',
         datasource=datasite.config.datasource,
-        query='label_values(jvm_memory_used_bytes{cluster=~"^$cluster"}, service)',
+        query='label_values('+metric+'{cluster=~"^$cluster"}, service)',
         refresh='time',
         includeAll=false,
         multi=false,
         sort=1
     ),
-    pod():: grafana.template.new(
+    pod(
+        metric='jvm_memory_used_bytes'
+    ):: grafana.template.new(
         name='pod',
         datasource=datasite.config.datasource,
-        query='label_values(jvm_memory_used_bytes{cluster=~"^$cluster", service=~"^$service"}, pod)',
+        query='label_values('+metric+'{cluster=~"^$cluster", service=~"^$service"}, pod)',
         refresh='time',
         includeAll=true,
         multi=true,
